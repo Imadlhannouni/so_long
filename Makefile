@@ -6,7 +6,7 @@
 #    By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 13:09:46 by ilhannou          #+#    #+#              #
-#    Updated: 2025/02/26 14:24:54 by ilhannou         ###   ########.fr        #
+#    Updated: 2025/02/26 20:18:44 by ilhannou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus re clean fclean
+.PHONY: all re clean fclean
