@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:16:31 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:28:35 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:35:34 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct a_textures
 	void	*enemy2;
 	void	*collectible;
 	void	*exit;
-}	b_textures;
+}	t_textures2;
 
 typedef struct a_map
 {
@@ -52,24 +52,24 @@ typedef struct a_map
 	int			is_moving;
 	int			frame_counter;
 	int			looking;
-	b_textures	textures;
-}	b_map;
+	t_textures2	textures;
+}	t_map2;
 
-char	**parse_to_map(char *file, b_map *map);
+char	**parse_to_map(char *file, t_map2 *map);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
-int		validate_map(b_map *map);
-void	free_map(b_map *map);
-void	load_textures(void *mlx, b_textures *t, b_map *map);
-void	render_map(void *mlx, void *w, b_map *map, b_textures *t);
-int		valid_path(b_map *map);
-int		close_game(b_map *map, int flag);
-void	setup_hooks(b_map *map);
+int		validate_map(t_map2 *map);
+void	free_map(t_map2 *map);
+void	load_textures(void *mlx, t_textures2 *t, t_map2 *map);
+void	render_map(void *mlx, void *w, t_map2 *map, t_textures2 *t);
+int		valid_path(t_map2 *map);
+int		close_game(t_map2 *map, int flag);
+void	setup_hooks(t_map2 *map);
 void	ft_putnbr_fd(int n, int fd);
-void	display_mouv(b_map *map, void *mlx_ptr, void *win_ptr);
-void	update_animation(b_map *map);
-void	player_update(b_map *map, int new_x, int new_y);
-int		count_rows(char *file, b_map *map);
-void	error_handling(b_map *map);
+void	display_mouv(t_map2 *map, void *mlx_ptr, void *win_ptr);
+void	update_animation(t_map2 *map);
+void	player_update(t_map2 *map, int new_x, int new_y);
+int		count_rows(char *file, t_map2 *map);
+void	error_handling(t_map2 *map);
 
 #endif

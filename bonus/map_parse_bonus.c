@@ -6,13 +6,13 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:49:06 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:12:46 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:34:47 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char	**parse_to_map(char *file, b_map *map)
+char	**parse_to_map(char *file, t_map2 *map)
 {
 	char	**grid;
 	char	*line;
@@ -38,7 +38,7 @@ char	**parse_to_map(char *file, b_map *map)
 	return (free(line), close(fd), grid);
 }
 
-static void	is_valid(b_map *map, int i, int j)
+static void	is_valid(t_map2 *map, int i, int j)
 {
 	if (map->grid[i][j] == 'C')
 		map->collectible++;
@@ -56,7 +56,7 @@ static void	is_valid(b_map *map, int i, int j)
 	}
 }
 
-static int	add_to_map(b_map *map, int i)
+static int	add_to_map(t_map2 *map, int i)
 {
 	int (j);
 	while (++i < map->rows)
@@ -74,7 +74,7 @@ static int	add_to_map(b_map *map, int i)
 	return (1);
 }
 
-static int	checksides(b_map *map)
+static int	checksides(t_map2 *map)
 {
 	int	i;
 
@@ -100,7 +100,7 @@ static int	checksides(b_map *map)
 	return (1);
 }
 
-int	validate_map(b_map *map)
+int	validate_map(t_map2 *map)
 {
 	int	i;
 

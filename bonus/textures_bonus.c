@@ -6,13 +6,13 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:50:46 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:36:28 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:35:37 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	load_textures(void *mlx, b_textures *t, b_map *map)
+void	load_textures(void *mlx, t_textures2 *t, t_map2 *map)
 {
 	int	w;
 	int	h;
@@ -37,7 +37,7 @@ void	load_textures(void *mlx, b_textures *t, b_map *map)
 	}
 }
 
-void	update_animation(b_map *map)
+void	update_animation(t_map2 *map)
 {
 	if (map->is_moving == 0)
 	{
@@ -47,7 +47,7 @@ void	update_animation(b_map *map)
 	}
 }
 
-static void	render_px(b_map *m, b_textures *t, int x, int y)
+static void	render_px(t_map2 *m, t_textures2 *t, int x, int y)
 {
 	if (m->grid[y][x] == 'P')
 	{
@@ -75,7 +75,7 @@ static void	render_px(b_map *m, b_textures *t, int x, int y)
 	}
 }
 
-void	render_map(void *mlx, void *w, b_map *map, b_textures *t)
+void	render_map(void *mlx, void *w, t_map2 *map, t_textures2 *t)
 {
 	int (x), (y);
 	y = 0;

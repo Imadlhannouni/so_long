@@ -6,20 +6,20 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:48:19 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/27 15:20:44 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:34:57 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static bool	is_valid_cell(b_map *map, int x,
+static bool	is_valid_cell(t_map2 *map, int x,
 		int y, bool **visited)
 {
 	return (x >= 0 && x < map->cols && y >= 0 && y < map->rows
 		&& map->grid[y][x] != '1' && map->grid[y][x] != 'X' && !visited[y][x]);
 }
 
-static void	flood_fill(b_map *map, int x,
+static void	flood_fill(t_map2 *map, int x,
 		int y, bool **visited)
 {
 	if (!is_valid_cell(map, x, y, visited))
@@ -31,7 +31,7 @@ static void	flood_fill(b_map *map, int x,
 	flood_fill(map, x, y - 1, visited);
 }
 
-static void	count(b_map *map, bool **visited,
+static void	count(t_map2 *map, bool **visited,
 		int *collectible, int *exit)
 {
 	int (i), (j);
@@ -67,7 +67,7 @@ static int	free_visited(bool **visited, int rows, int ret_val)
 	return (ret_val);
 }
 
-int	valid_path(b_map *map)
+int	valid_path(t_map2 *map)
 {
 	bool	**visited;
 

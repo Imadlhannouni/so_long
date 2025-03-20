@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:11:53 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:34:44 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:34:43 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static int	checkname(char *str)
 	return (1);
 }
 
-static int	game_loop(b_map *map)
+static int	game_loop(t_map2 *map)
 {
 	update_animation(map);
 	render_map(map->mlx, map->window, map, &map->textures);
 	return (0);
 }
 
-static void	init_list(b_map *map)
+static void	init_list(t_map2 *map)
 {
 	map->mouvements = 0;
 	map->grid = NULL;
@@ -84,7 +84,7 @@ static void	init_list(b_map *map)
 
 int	main(int argc, char *argv[])
 {
-	b_map		map;
+	t_map2		map;
 	int			i;
 
 	i = 0;
