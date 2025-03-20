@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:53:36 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:12:25 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:48:52 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,21 @@ static int	checksides(t_map *map)
 	while (i < map->rows)
 	{
 		if (map->grid[i][0] != '1' || map->grid[i][map->cols - 1] != '1')
-			return (0);
+			return (write(1, "Error: Invalid sides\n", 21), 0);
 		i++;
 	}
 	i = 0;
 	while (i < map->cols)
 	{
 		if (map->grid[0][i] != '1' || map->grid[map->rows - 1][i] != '1')
-			return (0);
+			return (write(1, "Error: Invalid sides\n", 21), 0);
 		i++;
 	}
 	i = 0;
 	if (!add_to_map(map, i))
 		return (0);
 	if (map->player != 1 || map->exit != 1 || map->collectible < 1)
-		return (0);
+		return (write(1, "Error: Invalid number of characters\n", 37), 0);
 	return (1);
 }
 
