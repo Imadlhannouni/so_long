@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 14:00:00 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/03/20 19:40:30 by ilhannou         ###   ########.fr       */
+/*   Created: 2025/02/27 14:43:03 by ilhannou          #+#    #+#             */
+/*   Updated: 2025/02/28 17:35:38 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void	display_mouv(int i)
+void	display_mouv(b_map *map, void *mlx, void *win)
 {
-	write(1, "Mouvements : ", 13);
-	ft_putnbr_fd(i, 1);
-	write(1, "\r", 1);
+	char	movements_str[100];
+
+	snprintf(movements_str, sizeof(movements_str), "Mouvements : %d",
+		map->mouvements);
+	mlx_string_put(mlx, win, 12, 12, 0xFFFFFF, movements_str);
 }
 
-void	move_player(t_map *map, int dx, int dy)
+void	move_player(b_map *map, int dx, int dy)
 {
 	int (new_x), (new_y);
 	new_x = map->player_x + dx;
@@ -28,7 +30,13 @@ void	move_player(t_map *map, int dx, int dy)
 		return ;
 	if (map->grid[new_y][new_x] == '1')
 		return ;
+	if (map->grid[new_y][new_x] == 'X')
+	{
+		write(1, "You Lost!\n", 10);
+		close_game(map, 0);
+	}
 	map->mouvements++;
+	map->is_moving = 1;
 	if (map->grid[new_y][new_x] == 'C')
 	{
 		map->collectible--;
@@ -39,11 +47,10 @@ void	move_player(t_map *map, int dx, int dy)
 		if (map->collectible == 0)
 			close_game(map, 0);
 	}
-	display_mouv(map->mouvements);
 	player_update(map, new_x, new_y);
 }
 
-static void	update_player_texture(t_map *map, int direction)
+static void	update_player_texture(b_map *map, int direction)
 {
 	int	width;
 	int	height;
@@ -66,7 +73,7 @@ static void	update_player_texture(t_map *map, int direction)
 	}
 }
 
-int	handle_keypress(int keycode, t_map *map)
+int	handle_keypress(int keycode, b_map *map)
 {
 	if (keycode == 119 || keycode == 65362)
 		move_player(map, 0, -1);
@@ -87,11 +94,11 @@ int	handle_keypress(int keycode, t_map *map)
 		close_game(map, 0);
 		return (0);
 	}
-	render_map(map->mlx, map->window, map, &map->textures);
+	map->is_moving = 0;
 	return (0);
 }
 
-void	setup_hooks(t_map *map)
+void	setup_hooks(b_map *map)
 {
 	mlx_hook(map->window, 2, 1L << 0, handle_keypress, map);
 	mlx_hook(map->window, 17, 0, close_game, map);

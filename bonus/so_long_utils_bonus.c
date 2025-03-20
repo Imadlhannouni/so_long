@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils.c                                    :+:      :+:    :+:   */
+/*   so_long_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:37:23 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/03/20 19:39:08 by ilhannou         ###   ########.fr       */
+/*   Created: 2025/02/27 15:17:47 by ilhannou          #+#    #+#             */
+/*   Updated: 2025/02/27 15:20:38 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	ft_putchar_fd(char c, int fd)
 {
@@ -29,7 +29,7 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd(n % 10 + '0', fd);
 }
 
-void	player_update(t_map *map, int new_x, int new_y)
+void	player_update(b_map *map, int new_x, int new_y)
 {
 	map->grid[map->player_y][map->player_x] = '0';
 	map->player_x = new_x;
@@ -37,7 +37,7 @@ void	player_update(t_map *map, int new_x, int new_y)
 	map->grid[new_y][new_x] = 'P';
 }
 
-int	count_rows(char *file, t_map *map)
+int	count_rows(char *file, b_map *map)
 {
 	char	*line;
 	int		fd;
@@ -59,7 +59,7 @@ int	count_rows(char *file, t_map *map)
 	return (0);
 }
 
-void	error_handling(t_map *map)
+void	error_handling(b_map *map)
 {
 	if (!map->grid)
 	{
@@ -68,6 +68,7 @@ void	error_handling(t_map *map)
 	}
 	if (!validate_map(map) || !valid_path(map))
 	{
+		write(2, "Error: Invalid map or path\n", 27);
 		free_map(map);
 		exit(1);
 	}

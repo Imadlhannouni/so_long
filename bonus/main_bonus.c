@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 20:20:12 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/03/20 19:37:00 by ilhannou         ###   ########.fr       */
+/*   Created: 2025/02/27 15:11:53 by ilhannou          #+#    #+#             */
+/*   Updated: 2025/02/28 17:34:44 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -61,13 +61,21 @@ static int	checkname(char *str)
 	return (1);
 }
 
-static void	init_list(t_map *map)
+static int	game_loop(b_map *map)
+{
+	update_animation(map);
+	render_map(map->mlx, map->window, map, &map->textures);
+	return (0);
+}
+
+static void	init_list(b_map *map)
 {
 	map->mouvements = 0;
 	map->grid = NULL;
 	map->is_moving = 0;
 	map->frame_counter = 0;
 	map->looking = 0;
+	map->enemy = 0;
 	map->rows = 0;
 	map->collectible = 0;
 	map->player = 0;
@@ -76,7 +84,7 @@ static void	init_list(t_map *map)
 
 int	main(int argc, char *argv[])
 {
-	t_map		map;
+	b_map		map;
 	int			i;
 
 	i = 0;
@@ -95,6 +103,8 @@ int	main(int argc, char *argv[])
 			return (perror("Error"), close_game(&map, 1), 1);
 		setup_hooks(&map);
 		render_map(map.mlx, map.window, &map, &map.textures);
+		display_mouv(&map, map.mlx, map.window);
+		mlx_loop_hook(map.mlx, game_loop, &map);
 		mlx_loop(map.mlx);
 	}
 	else if (argc != 2)

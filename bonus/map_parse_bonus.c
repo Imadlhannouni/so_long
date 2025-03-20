@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parse.c                                        :+:      :+:    :+:   */
+/*   map_parse_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 14:53:36 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:12:25 by ilhannou         ###   ########.fr       */
+/*   Created: 2025/02/27 14:49:06 by ilhannou          #+#    #+#             */
+/*   Updated: 2025/02/28 17:12:46 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-char	**parse_to_map(char *file, t_map *map)
+char	**parse_to_map(char *file, b_map *map)
 {
 	char	**grid;
 	char	*line;
@@ -38,7 +38,7 @@ char	**parse_to_map(char *file, t_map *map)
 	return (free(line), close(fd), grid);
 }
 
-static void	is_valid(t_map *map, int i, int j)
+static void	is_valid(b_map *map, int i, int j)
 {
 	if (map->grid[i][j] == 'C')
 		map->collectible++;
@@ -56,7 +56,7 @@ static void	is_valid(t_map *map, int i, int j)
 	}
 }
 
-static int	add_to_map(t_map *map, int i)
+static int	add_to_map(b_map *map, int i)
 {
 	int (j);
 	while (++i < map->rows)
@@ -67,14 +67,14 @@ static int	add_to_map(t_map *map, int i)
 			is_valid(map, i, j);
 			if (map->grid[i][j] != '1' && map->grid[i][j] != '0'
 					&& map->grid[i][j] != 'P' && map->grid[i][j] != 'C'
-						&& map->grid[i][j] != 'E')
+						&& map->grid[i][j] != 'E' && map->grid[i][j] != 'X')
 				return (write(1, "Error: Invalid characters\n", 26), 0);
 		}
 	}
 	return (1);
 }
 
-static int	checksides(t_map *map)
+static int	checksides(b_map *map)
 {
 	int	i;
 
@@ -100,7 +100,7 @@ static int	checksides(t_map *map)
 	return (1);
 }
 
-int	validate_map(t_map *map)
+int	validate_map(b_map *map)
 {
 	int	i;
 
