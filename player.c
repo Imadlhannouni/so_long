@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:00:00 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/03/20 19:40:30 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:41:56 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	handle_keypress(int keycode, t_map *map)
 	}
 	else if (keycode == 65307)
 	{
+		if (map->mouvements != 0)
+			write(1, "\n", 1);
 		close_game(map, 0);
 		return (0);
 	}
