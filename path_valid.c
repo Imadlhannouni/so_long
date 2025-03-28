@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 20:46:01 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/02/28 17:10:54 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/21 20:09:26 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	valid_path(t_map *map)
 	count(map, visited, &collectible, &exit);
 	free_visited(visited, map->rows, 1);
 	if (collectible == map->collectible && exit == 1)
-		return (1);
+	return (write(1, "Error: characters blocked\n", 26), 1);
 	return (0);
 }

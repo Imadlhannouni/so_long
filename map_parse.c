@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:53:36 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/03/20 20:48:52 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/03/21 20:07:54 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ int	validate_map(t_map *map)
 	int	i;
 
 	map->cols = ft_strlen(map->grid[0]) - 1;
-	if (map->cols == map->rows)
-		return (0);
 	i = 0;
 	while (i < map->rows)
 	{
